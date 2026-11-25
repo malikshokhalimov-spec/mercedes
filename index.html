@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Каталог моделей Mercedes-Benz: актуальные и классические автомобили, характеристики, сравнение и история марки.">
+  <title>Mercedes-Benz — каталог моделей и история марки</title>
+  <link rel="preload" href="img/e-class.jpg" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='none' stroke='%23c0c0c0' stroke-width='6'/%3E%3Ctext x='50' y='64' font-size='40' text-anchor='middle' fill='%23c0c0c0' font-family='Georgia'%3EMB%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip" href="#models">Перейти к моделям</a>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#top" class="brand" aria-label="На главную">
+        <span class="brand__mark" aria-hidden="true">MB</span>
+        <span class="brand__text">Mercedes-Benz<small>Каталог моделей</small></span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="#models">Модели</a>
+        <a href="#compare">Сравнение</a>
+        <a href="#history">История</a>
+        <a href="#tech">Технологии</a>
+        <a href="#favorites" data-filter-favs>Избранное <span class="badge" id="favCount" hidden>0</span></a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="container hero__content">
+        <p class="eyebrow">С 1886 года</p>
+        <h1 class="hero__title">Лучшее или ничего.</h1>
+        <p class="hero__lead">Полный каталог Mercedes-Benz — от первого автомобиля в истории до электрических флагманов и гиперкаров AMG. Характеристики, сравнение и история марки.</p>
+        <div class="hero__cta">
+          <a href="#models" class="btn btn--light">Смотреть модели</a>
+          <a href="#history" class="btn btn--ghost">История марки</a>
+        </div>
+      </div>
+      <div class="container hero__stats">
+        <div><strong>140</strong><span>лет истории</span></div>
+        <div><strong id="statModels">—</strong><span>моделей в каталоге</span></div>
+        <div><strong>1 063</strong><span>л.с. — AMG ONE</span></div>
+        <div><strong>8</strong><span>кубков конструкторов F1</span></div>
+      </div>
+    </section>
+
+    <!-- MODELS -->
+    <section class="section" id="models">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow eyebrow--dark">Модельный ряд</p>
+          <h2 class="section__title">Модели</h2>
+        </header>
+
+        <div class="toolbar">
+          <div class="segmented" role="tablist" aria-label="Эпоха">
+            <button class="segmented__btn is-active" data-era="all" role="tab" aria-selected="true">Все</button>
+            <button class="segmented__btn" data-era="new" role="tab" aria-selected="false">Новые</button>
+            <button class="segmented__btn" data-era="classic" role="tab" aria-selected="false">Классика</button>
+          </div>
+
+          <div class="toolbar__right">
+            <label class="search">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+              <input type="search" id="search" placeholder="Поиск: S-Class, W124, AMG…" autocomplete="off" aria-label="Поиск модели">
+            </label>
+            <label class="select">
+              <span class="visually-hidden">Сортировка</span>
+              <select id="sort" aria-label="Сортировка">
+                <option value="default">По умолчанию</option>
+                <option value="year-desc">Сначала новые</option>
+                <option value="year-asc">Сначала старые</option>
+                <option value="power-desc">Мощность ↓</option>
+                <option value="accel-asc">Разгон 0–100 ↑</option>
+                <option value="name">По названию</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="chips" id="bodyChips" aria-label="Тип кузова">
+          <button class="chip is-active" data-body="all">Все кузова</button>
+          <button class="chip" data-body="sedan">Седаны</button>
+          <button class="chip" data-body="suv">Внедорожники</button>
+          <button class="chip" data-body="coupe">Купе</button>
+          <button class="chip" data-body="roadster">Родстеры</button>
+          <button class="chip" data-body="ev">Электро</button>
+          <button class="chip" data-body="hyper">Гиперкары</button>
+          <button class="chip" data-body="van">Минивэны</button>
+          <button class="chip chip--amg" data-body="amg">AMG</button>
+          <button class="chip" data-body="favs">♥ Избранное</button>
+        </div>
+
+        <p class="results" id="results" aria-live="polite"></p>
+        <div class="grid" id="grid"></div>
+        <div class="empty" id="empty" hidden>
+          <p>Ничего не найдено.</p>
+          <button class="btn btn--dark" id="resetFilters">Сбросить фильтры</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPARE -->
+    <section class="section section--grey" id="compare">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow eyebrow--dark">До трёх моделей</p>
+          <h2 class="section__title">Сравнение</h2>
+          <p class="section__lead">Нажмите «Сравнить» на карточке модели. Лучшее значение в каждой строке выделено.</p>
+        </header>
+        <div id="compareBox"></div>
+      </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section class="section section--dark" id="history">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow">1886 — 2026</p>
+          <h2 class="section__title">История марки</h2>
+        </header>
+        <ol class="timeline" id="timeline"></ol>
+      </div>
+    </section>
+
+    <!-- TECH -->
+    <section class="section" id="tech">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow eyebrow--dark">Впервые в мире</p>
+          <h2 class="section__title">Технологии, изменившие индустрию</h2>
+        </header>
+        <div class="tech" id="techGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <div class="brand brand--footer"><span class="brand__mark" aria-hidden="true">MB</span><span class="brand__text">Mercedes-Benz<small>Каталог моделей</small></span></div>
+        <p class="footer__note">Неофициальный информационный сайт для энтузиастов. Не связан с Mercedes-Benz Group AG. Названия моделей и товарные знаки принадлежат их владельцам. Характеристики приведены для указанных версий и могут отличаться в зависимости от рынка.</p>
+      </div>
+      <details class="credits">
+        <summary>Источники фотографий</summary>
+        <p>Фотографии — Wikimedia Commons, распространяются по свободным лицензиям (CC BY / CC BY-SA, авторы указаны на страницах файлов). Модели без фото показаны в виде иллюстраций.</p>
+        <ul id="credits"></ul>
+      </details>
+      <p class="footer__copy">© <span id="year"></span> · Сделано с любовью к автомобилям</p>
+    </div>
+  </footer>
+
+  <!-- Плавающая панель сравнения -->
+  <div class="cbar" id="cbar" hidden>
+    <div class="cbar__items" id="cbarItems"></div>
+    <a href="#compare" class="btn btn--light btn--sm">Сравнить</a>
+  </div>
+
+  <!-- Модальное окно модели -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <article class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="mTitle" tabindex="-1">
+      <button class="modal__close" data-close aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+      <div id="modalBody"></div>
+    </article>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/models.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
